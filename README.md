@@ -236,4 +236,3 @@ jobs:
 Create a new release of the code, and make sure the workflow runs and creates an image (also called package on GitHub) in your repository
 
 
-python code/count.py  --path data --output figures
