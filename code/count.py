@@ -27,6 +27,7 @@ def count_words(text: str) -> Dict[str, int]:
 import glob 
 from os.path import basename
 import matplotlib.pyplot as plt
+from plot import plot
 
 def main(argv: Sequence[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=count_words.__doc__)
@@ -38,15 +39,10 @@ def main(argv: Sequence[str] | None = None) -> int:
     for file in all_files_in_dir:
         file_obj = open(file, "r")
         counts = count_words(file_obj.read())
-        output_file = args["output"] / (basename(file) + ".png")
+        output_file = args["output"] / (basename(file).split(".")[0] + ".png")
         # create if not path exist
         output_file.parent.mkdir(parents=True, exist_ok=True)
-        # plot count to a bar chart
-        plt.bar(counts.keys(), counts.values())
-        plt.xlabel("Word")
-        plt.ylabel("Count")
-        plt.savefig(output_file)
-        plt.close()
+        plot(counts, output_file)
 
 
 
